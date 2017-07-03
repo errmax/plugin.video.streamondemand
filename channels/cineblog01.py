@@ -3,7 +3,7 @@
 # streamondemand.- XBMC Plugin
 # Canal para cineblog01
 # http://www.mimediacenter.info/foro/viewforum.php?f=36
-# Version: 201706200900
+# Version: 201707030930
 # ------------------------------------------------------------
 import re
 import urlparse
@@ -611,7 +611,7 @@ def play(item):
                 data = scrapertools.get_match(data, r'<a href="([^"]+)".*?class="btn-wrapper">.*?licca.*?</a>')
             except IndexError:
                 data = httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get("location")
-        while 'vcrypt' in data:
+        if 'vcrypt' in data:
             data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location")
         logger.debug("##### play go.php data ##\n%s\n##" % data)
     elif "/link/" in item.url:
