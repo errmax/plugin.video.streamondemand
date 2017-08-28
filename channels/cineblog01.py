@@ -3,7 +3,7 @@
 # streamondemand.- XBMC Plugin
 # Canal para cineblog01
 # http://www.mimediacenter.info/foro/viewforum.php?f=36
-# Version: 201706200900
+# Version: 201708281738
 # ------------------------------------------------------------
 import re
 import urlparse
@@ -610,9 +610,9 @@ def play(item):
                 # In alternativa, dato che a volte compare "Clicca qui per proseguire":
                 data = scrapertools.get_match(data, r'<a href="([^"]+)".*?class="btn-wrapper">.*?licca.*?</a>')
             except IndexError:
-                data = httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get("location")
+                data = httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get("location","")
         while 'vcrypt' in data:
-            data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location")
+            data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location","")
         logger.debug("##### play go.php data ##\n%s\n##" % data)
     elif "/link/" in item.url:
         data = httptools.downloadpage(item.url, headers=headers).data
@@ -627,7 +627,7 @@ def play(item):
 
         data = scrapertools.find_single_match(data, 'var link(?:\s)?=(?:\s)?"([^"]+)";')
         while 'vcrypt' in data:
-            data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location")
+            data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location","")
         logger.debug("##### play /link/ data ##\n%s\n##" % data)
     else:
         data = item.url
