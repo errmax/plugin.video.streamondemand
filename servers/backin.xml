@@ -12,7 +12,7 @@
 		<ignore_urls>
 		</ignore_urls>
 		<patterns>
-			<pattern>(?:backin).net/([A-Z0-9]+)</pattern>
+			<pattern>(?:backin).net/([A-Za-z0-9]+)</pattern>
 			<url>http://backin.net/s/generating.php?code=\1</url>
 		</patterns>
 	</find_videos>
