@@ -23,12 +23,13 @@ def get_video_url(page_url, premium=False, user="", password="", video_password=
     headers = [["User-Agent", "Mozilla/5.0 (Windows NT 6.1; rv:54.0) Gecko/20100101 Firefox/54.0"]]
 
     # First access
-    httptools.downloadpage("http://backin.net/s/%s" % page_url, headers=headers)
+    httptools.downloadpage(page_url, headers=headers)
 
     xbmc.sleep(10000)
-    headers.append(["Referer", "http://backin.net/s/%s" % page_url])
+    vid = scrapertools.find_single_match(page_url, '(?:backin.*)\?s=([A-Z0-9a-z]+)')
+    headers.append(["Referer", "http://backin.net/s/%s" % vid])
 
-    data = httptools.downloadpage("http://backin.net/stream-%s-500x400.html" % page_url, headers=headers).data
+    data = httptools.downloadpage("http://backin.net/stream-%s-500x400.html" % vid, headers=headers).data
 
     data_pack = scrapertools.find_single_match(data, "(eval.function.p,a,c,k,e,.*?)\s*</script>")
     if data_pack:
