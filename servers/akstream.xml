@@ -15,6 +15,10 @@
 			<pattern>http://akstream.(?:net|video)/(?:v|videos)/([a-z0-9]+)</pattern>
 			<url>http://akstream.video/stream/\1</url>
 		</patterns>
+                <patterns>
+                        <pattern>[^:]+/akstream.(?:net|video)/(?:videos|v)([a-z0-9]+)</pattern>
+                        <url>http://akstream.video/stream/\1</url>
+                </patterns>		
 	</find_videos>
 	<free>true</free>
 	<id>akstream</id>
