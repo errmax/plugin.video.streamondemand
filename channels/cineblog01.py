@@ -332,7 +332,7 @@ def season_serietv(item):
 
     starts = []
     season_titles = []
-    patron = '^stagion[i|e].*$'
+    patron = '^(?:seri|stagion)[i|e].*$'
     matches = re.compile(patron, re.MULTILINE | re.IGNORECASE).finditer(data)
     for match in matches:
         if match.group() != '':
